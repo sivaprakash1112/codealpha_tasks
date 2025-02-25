@@ -1,0 +1,37 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class WordCounter {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Word Counter");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JTextArea textArea = new JTextArea("Enter your paragraph here...");
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        JButton countButton = new JButton("Count Words");
+        JLabel resultLabel = new JLabel("Word Count: 0", JLabel.CENTER);
+
+        countButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = textArea.getText().trim();
+                int wordCount = text.isEmpty() ? 0 : text.split("\\s+").length;
+                resultLabel.setText("Word Count: " + wordCount);
+            }
+        });
+
+        panel.add(countButton, BorderLayout.SOUTH);
+        panel.add(resultLabel, BorderLayout.NORTH);
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
